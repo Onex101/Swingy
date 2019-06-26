@@ -3,6 +3,8 @@ package Models.Mobs;
 import Models.Artifacts.Artifact;
 import Models.Items.Item;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -58,7 +60,26 @@ public class Hero extends Mob {
     public void equipArtifact(Artifact artifact){
 
     }
-    public void save(){}
+
+
+    public String saveString(){
+        String str = name + " " +
+                getClass().getSimpleName() + " " +
+                level + " " +
+                experiencePnts + " " +
+                maxHitPnts + " " +
+                maxAttackPnts + " " +
+                maxDefencePnts + " " +
+                this.equipped.length + " ";
+        if (this.equipped[0] != null)
+            str += this.equipped[0].getName() + " " + this.equipped[0].getBuff() + " ";
+        if (this.equipped[1] != null)
+            str += this.equipped[1].getName() + " " + this.equipped[1].getBuff() + " ";
+        if (this.equipped[2] != null)
+            str += this.equipped[2].getName() + " " + this.equipped[2].getBuff() + " ";
+        return str;
+    }
+
     public void load(){}
 
     @Override

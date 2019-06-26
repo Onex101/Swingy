@@ -23,10 +23,9 @@ public class MenuScreen {
 
             if ("create".equalsIgnoreCase(input)) {
                 controller.onCreateHero();
-                new CreateHeroScreen().Display();
                 break;
             } else if ("select".equalsIgnoreCase(input)) {
-                //controller.onSelectHero();
+                controller.onSelectHero();
                 break;
             } else {
                 System.out.println("Unknown command");

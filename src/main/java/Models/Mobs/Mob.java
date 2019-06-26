@@ -33,6 +33,7 @@ public abstract class Mob {
         this.experiencePnts = 0;
         this.backpack = null;
         this.equipped = new Artifact[3];
+
     }
 
     public Mob(String name, int level, int experiencePnts, int maxHitPnts, int maxAttackPnts, int maxDefencePnts, List<Item> backpack, Artifact[] equipped) {

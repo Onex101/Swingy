@@ -2,6 +2,7 @@ package Controllers;
 
 import GameLogic.Main;
 import Models.Mobs.*;
+import Models.SaveLoad;
 import Views.Console.GameScreen;
 
 public class CreateHeroController {
@@ -27,6 +28,7 @@ public class CreateHeroController {
                 oHero = new Hero(name);
                 break;
         }
+        SaveLoad.saveGame(oHero);
         Main.getGame().initGame(oHero);
         new GameScreen(Main.getGame());
     }

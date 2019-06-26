@@ -18,6 +18,11 @@ public class Artifact {
         this.name = artifactNames[random.nextInt(4)];
     }
 
+    public Artifact(String name, int abilityBuff) {
+        this.abilityBuff = abilityBuff;
+        this.name = name;
+    }
+
     @Override
     public String toString() {
         return "{abilityBuff= " + abilityBuff + ", rarity= '" + name + "\'}";
@@ -26,5 +31,7 @@ public class Artifact {
     public int getBuff() {
         return this.abilityBuff;
     }
+
+    public String getName(){return name;}
 
 }
