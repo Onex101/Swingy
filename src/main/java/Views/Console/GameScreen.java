@@ -8,7 +8,7 @@ import Models.Mobs.Monster;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class GameScreen {
+public class GameScreen implements Views.GameView {
 
     private GameController controller;
 
@@ -17,6 +17,7 @@ public class GameScreen {
         controller.displayGame();
     }
 
+    @Override
     public void display(Game game) {
         System.out.println("----------Round "+game.getRound()+"----------");
         System.out.println(game.getHero().toString() +
@@ -55,6 +56,7 @@ public class GameScreen {
         System.out.println(Arrays.deepToString(map).replace("], ", "]\n"));
     }
 
+    @Override
     public void displayEncounter() {
         Scanner scanner = Main.getScanner();
 
@@ -78,15 +80,18 @@ public class GameScreen {
         }
     }
 
+    @Override
     public void displayMonster(Monster monster) {
         System.out.println();
         System.out.println("My name is " + monster.getName() + ". Fear me!");
     }
 
+    @Override
     public void displayFightLost() {
         System.out.println("Better luck next time hero");
     }
 
+    @Override
     public void displayFightWon(Monster monster) {
         System.out.println("Well done hero! You defeated the monster!");
         System.out.println("The monster dropped an Artifact \n" + monster.toStringEquipped() + ".\nWould you like to equip it?");
@@ -110,11 +115,13 @@ public class GameScreen {
         controller.displayGame();
     }
 
+    @Override
     public void displayRunSuccess() {
         System.out.println("Well done you ran away... You really think you are fit for this job?");
         controller.displayGame();
     }
 
+    @Override
     public void displayRunFailed() {
         System.out.println("Oops... Seems like you tripped... Gotta fight the monster now.");
         controller.onFight();

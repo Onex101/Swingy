@@ -6,9 +6,10 @@ import Models.Mobs.Hero;
 
 import java.util.Scanner;
 
-public class CreateHeroScreen {
+public class CreateHeroScreen implements Views.CreateHeroScreen, Views.CreateHeroView {
     private CreateHeroController controller;
 
+    @Override
     public void Display() {
         controller = new CreateHeroController();
         Scanner scanner = Main.getScanner();

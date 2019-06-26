@@ -21,7 +21,7 @@ public class Hero extends Mob {
     }
 
     public Hero(String name){
-        super(name, 1, 0, 5, 5, 5, null, null);
+        super(name, 1, 0, 5, 5, 5, null, new Artifact[3]);
     }
 
     public void gainExperince(int gain){

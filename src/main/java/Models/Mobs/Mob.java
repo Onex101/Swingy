@@ -33,7 +33,9 @@ public abstract class Mob {
         this.experiencePnts = 0;
         this.backpack = null;
         this.equipped = new Artifact[3];
-
+        equipped[HELM] = new Artifact("Common", 0);
+        equipped[ARMOUR] = new Artifact("Common", 0);
+        equipped[WEAPON] = new Artifact("Common", 0);
     }
 
     public Mob(String name, int level, int experiencePnts, int maxHitPnts, int maxAttackPnts, int maxDefencePnts, List<Item> backpack, Artifact[] equipped) {
@@ -49,16 +51,22 @@ public abstract class Mob {
         attackPnts = maxAttackPnts;
         if (this.equipped[WEAPON] != null)
             attackPnts += this.equipped[WEAPON].getBuff();
+        else
+            equipped[WEAPON] = new Artifact("Common", 0);
 
         this.maxDefencePnts = maxDefencePnts;
         defencePnts = maxDefencePnts;
         if (this.equipped[ARMOUR] != null)
             defencePnts += this.equipped[ARMOUR].getBuff();
+        else
+            equipped[ARMOUR] = new Artifact("Common", 0);
 
         this.maxHitPnts = maxHitPnts;
         hitPnts = maxHitPnts;
         if (this.equipped[HELM] != null)
             hitPnts += this.equipped[HELM].getBuff();
+        else
+            equipped[HELM] = new Artifact("Common", 0);
 
         this.experiencePnts -= maxExperiencePnts;
         maxExperiencePnts = level * 1000 + (int)Math.pow(level - 1, 2) * 450;

@@ -15,7 +15,7 @@ public class C extends Hero{
                 , 10
                 , 10
                 , null
-                , null);
+                , new Artifact[3]);
     }
 
     public C(String name, int level, int experiencePnts, int maxHitPnts, int maxAttackPnts, int maxDefencePnts, List<Item> backpack, Artifact[] equipped) {

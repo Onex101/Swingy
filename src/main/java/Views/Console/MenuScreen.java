@@ -5,10 +5,11 @@ import GameLogic.Main;
 
 import java.util.Scanner;
 
-public class MenuScreen {
+public class MenuScreen implements Views.MenuView {
 
     private MenuController controller;
 
+    @Override
     public void Display() {
         controller = new MenuController();
         System.out.println("Welcome to One Punch Man RPG");

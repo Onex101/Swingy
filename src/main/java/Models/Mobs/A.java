@@ -15,7 +15,7 @@ public class A extends Hero {
             , 20
             , 20
             , null
-            , null);
+            , new Artifact[3]);
     }
 
     public A(String name, int level, int experiencePnts, int maxHitPnts, int maxAttackPnts, int maxDefencePnts, List<Item> backpack, Artifact[] equipped) {

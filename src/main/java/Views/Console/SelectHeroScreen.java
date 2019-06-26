@@ -7,11 +7,12 @@ import Models.Mobs.Hero;
 import java.util.List;
 import java.util.Scanner;
 
-public class SelectHeroScreen {
+public class SelectHeroScreen implements Views.SelectHeroView {
 
     private SelectHeroController controller = new SelectHeroController();
     private List<Hero> heroList;
 
+    @Override
     public void Display() {
         heroList = controller.getSaveGames();
         int heroListSize = heroList.size();
@@ -20,6 +21,7 @@ public class SelectHeroScreen {
 
         System.out.println("Please select a character by their index");
         for (int i = 0; i < heroListSize; ++i){
+            System.out.println("Hero Index:" + i);
             System.out.println(heroList.get(i).toString());
         }
         Scanner oScanner = Main.getScanner();
