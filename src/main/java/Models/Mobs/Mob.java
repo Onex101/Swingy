@@ -113,4 +113,19 @@ public abstract class Mob {
     public int getHitPnts() {
         return hitPnts;
     }
+
+    public String toStringEquipped() {
+        String items = "";
+        if (equipped[HELM] != null)
+            items += "HELM " + equipped[HELM].toString();
+        if (equipped[ARMOUR] != null)
+            items += "Armour " + equipped[ARMOUR].toString();
+        if (equipped[WEAPON] != null)
+            items += "WEAPON " + equipped[WEAPON].toString();
+        return items;
+    }
+
+    public Artifact[] getEquipped() {
+        return equipped;
+    }
 }

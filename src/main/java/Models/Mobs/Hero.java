@@ -55,7 +55,9 @@ public class Hero extends Mob {
 
     public void unequipArtifact(){}
     public void lootEnemy(){}
-    public void equipArtifact(){}
+    public void equipArtifact(Artifact artifact){
+
+    }
     public void save(){}
     public void load(){}
 

@@ -93,6 +93,8 @@ public class Game {
     }
 
     public void newRound() {
+        initGame(this.hero);
+        this.round++;
     }
 
     public int getMapSize() {
@@ -119,5 +121,18 @@ public class Game {
             monster.attack(this.hero);
         }
         return -1;
+    }
+
+    public boolean moveHero(int x, int y, int prevX, int prevY) {
+        map[prevY][prevX] = 0;
+        setHeroCoordinates(x, y);
+        boolean checkMonster = false;
+        if (checkForMonster())
+            checkMonster = true;
+        return checkMonster;
+    }
+
+    public void setMap() {
+        map[heroY][heroX] = HERO;
     }
 }
