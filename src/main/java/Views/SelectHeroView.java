@@ -1,5 +1,9 @@
 package Views;
 
 public interface SelectHeroView {
-    void Display();
+    void display();
+
+    void goToGame();
+
+    void goToHeroCreate();
 }

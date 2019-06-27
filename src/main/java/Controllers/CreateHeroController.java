@@ -4,10 +4,16 @@ import GameLogic.Main;
 import Models.Mobs.*;
 import Models.SaveLoad;
 import Views.Console.GameScreen;
+import Views.CreateHeroView;
+import Views.GameView;
 
 public class CreateHeroController {
 
-    public CreateHeroController(){}
+    private final CreateHeroView createHeroView;
+
+    public CreateHeroController(CreateHeroView createHeroView){
+        this.createHeroView = createHeroView;
+    }
 
     public void onCreateHero(String name, String heroClass) {
         Hero oHero;
@@ -30,6 +36,6 @@ public class CreateHeroController {
         }
         SaveLoad.saveGame(oHero);
         Main.getGame().initGame(oHero);
-        new GameScreen(Main.getGame());
+        createHeroView.goToGame();
     }
 }

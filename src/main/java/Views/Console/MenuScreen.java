@@ -9,9 +9,12 @@ public class MenuScreen implements Views.MenuView {
 
     private MenuController controller;
 
+    public MenuScreen(){
+        controller = new MenuController(this);
+    }
+
     @Override
-    public void Display() {
-        controller = new MenuController();
+    public void display() {
         System.out.println("Welcome to One Punch Man RPG");
 
         Scanner oScanner = Main.getScanner();
@@ -33,6 +36,15 @@ public class MenuScreen implements Views.MenuView {
             }
         }
     }
+
+    @Override
+    public void goToHeroSelect(){
+        new SelectHeroScreen().display();
+    };
+    @Override
+    public void goToHeroCreate(){
+        new CreateHeroScreen().display();
+    };
 
 //Need to switch view
 //Need to add select Hero

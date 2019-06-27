@@ -9,11 +9,15 @@ import java.util.Scanner;
 
 public class SelectHeroScreen implements Views.SelectHeroView {
 
-    private SelectHeroController controller = new SelectHeroController();
+    private SelectHeroController controller;
     private List<Hero> heroList;
 
+    SelectHeroScreen(){
+        controller = new SelectHeroController(this);
+    }
+
     @Override
-    public void Display() {
+    public void display() {
         heroList = controller.getSaveGames();
         int heroListSize = heroList.size();
         if (heroListSize <= 0)
@@ -37,5 +41,15 @@ public class SelectHeroScreen implements Views.SelectHeroView {
             }
         }
 
+    }
+
+    @Override
+    public void goToGame(){
+        new GameScreen(Main.getGame());
+    }
+
+    @Override
+    public void goToHeroCreate(){
+        new CreateHeroScreen();
     }
 }

@@ -6,12 +6,12 @@ import Models.Mobs.Hero;
 
 import java.util.Scanner;
 
-public class CreateHeroScreen implements Views.CreateHeroScreen, Views.CreateHeroView {
+public class CreateHeroScreen implements Views.CreateHeroView {
     private CreateHeroController controller;
 
     @Override
-    public void Display() {
-        controller = new CreateHeroController();
+    public void display() {
+        controller = new CreateHeroController(this);
         Scanner scanner = Main.getScanner();
 
         System.out.println("Welcome to the Hero Association. Please sign up by giving us your Hero Name");
@@ -43,6 +43,11 @@ public class CreateHeroScreen implements Views.CreateHeroScreen, Views.CreateHer
                 break;
             }
         }
+    }
+
+    @Override
+    public void goToGame(){
+        new GameScreen(Main.getGame());
     }
 
 

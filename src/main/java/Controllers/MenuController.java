@@ -3,18 +3,21 @@ package Controllers;
 import Views.Console.CreateHeroScreen;
 import Views.Console.MenuScreen;
 import Views.Console.SelectHeroScreen;
+import Views.MenuView;
 
 public class MenuController {
 
-    private MenuScreen menuScreen;
+    private MenuView menuView;
 
-    public MenuController(){}
+    public MenuController(MenuView menuView){
+        this.menuView = menuView;
+    }
 
     public void onCreateHero() {
-        new CreateHeroScreen().Display();
+        this.menuView.goToHeroCreate();
     }
 
     public void onSelectHero() {
-        new SelectHeroScreen().Display();
+        this.menuView.goToHeroSelect();
     }
 }

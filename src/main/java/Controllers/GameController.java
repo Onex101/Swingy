@@ -11,13 +11,13 @@ import static Models.Artifacts.Artifact.*;
 
 public class GameController {
 
-    private GameScreen gameScreen;
+    private GameScreen gameView;
     private int prevX;
     private int prevY;
     private Game game;
 
-    public GameController(Game game, GameScreen gameScreen){
-        this.gameScreen = gameScreen;
+    public GameController(Game game, GameScreen gameView){
+        this.gameView = gameView;
         this.game = game;
     }
 
@@ -48,7 +48,7 @@ public class GameController {
         }
 
         if (game.moveHero(x, y, prevX, prevY)) {
-            this.gameScreen.displayEncounter();
+            this.gameView.displayEncounter();
         }
         else{
             game.setMap();
@@ -59,7 +59,7 @@ public class GameController {
     }
 
     public void displayGame() {
-        this.gameScreen.display(this.game);
+        this.gameView.display(this.game);
     }
 
     public Game getGame() {
@@ -68,12 +68,12 @@ public class GameController {
 
     public void onFight() {
         Monster monster = this.game.randomMonster();
-        this.gameScreen.displayMonster(monster);
+        this.gameView.displayMonster(monster);
         if (this.game.fight(monster) <= 0) {
-            this.gameScreen.displayFightLost();
+            this.gameView.displayFightLost();
         } else {
             game.setMap();
-            this.gameScreen.displayFightWon(monster);
+            this.gameView.displayFightWon(monster);
         }
     }
 
@@ -82,20 +82,20 @@ public class GameController {
         if (random.nextInt(2) > 0){
             game.setHeroCoordinates(prevX, prevY);
             game.setMap();
-            this.gameScreen.displayRunSuccess();
+            this.gameView.displayRunSuccess();
         }
         else{
-            this.gameScreen.displayRunFailed();
+            this.gameView.displayRunFailed();
             this.onFight();
         }
     }
 
     public void onEquipLoot(Artifact[] equipped) {
-        if (equipped[HELM] != null)
+        if (equipped[HELM] != null && equipped[HELM].getBuff() > 0)
             game.getHero().getEquipped()[HELM] = equipped[HELM];
-        if (equipped[ARMOUR] != null)
+        if (equipped[ARMOUR] != null && equipped[ARMOUR].getBuff() > 0)
             game.getHero().getEquipped()[ARMOUR] = equipped[ARMOUR];
-        if (equipped[WEAPON] != null)
+        if (equipped[WEAPON] != null && equipped[WEAPON].getBuff() > 0)
             game.getHero().getEquipped()[WEAPON] = equipped[WEAPON];
     }
 }

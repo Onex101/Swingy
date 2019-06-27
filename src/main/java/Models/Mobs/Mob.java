@@ -125,12 +125,12 @@ public abstract class Mob {
 
     public String toStringEquipped() {
         String items = "";
-        if (equipped[HELM] != null)
-            items += "HELM " + equipped[HELM].toString();
-        if (equipped[ARMOUR] != null)
-            items += "Armour " + equipped[ARMOUR].toString();
-        if (equipped[WEAPON] != null)
-            items += "WEAPON " + equipped[WEAPON].toString();
+        if (equipped[HELM] != null && equipped[HELM].getBuff() > 0)
+            items += "HELM " + equipped[HELM].toString() + "\n";
+        if (equipped[ARMOUR] != null && equipped[ARMOUR].getBuff() > 0)
+            items += "Armour " + equipped[ARMOUR].toString() + "\n";
+        if (equipped[WEAPON] != null && equipped[WEAPON].getBuff() > 0)
+            items += "WEAPON " + equipped[WEAPON].toString() + "\n";
         return items;
     }
 

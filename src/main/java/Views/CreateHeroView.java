@@ -1,5 +1,7 @@
 package Views;
 
 public interface CreateHeroView {
-    void Display();
+    void display();
+
+    void goToGame();
 }

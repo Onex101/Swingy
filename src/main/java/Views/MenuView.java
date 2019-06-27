@@ -1,5 +1,9 @@
 package Views;
 
 public interface MenuView {
-    void Display();
+    void display();
+
+    void goToHeroSelect();
+
+    void goToHeroCreate();
 }
