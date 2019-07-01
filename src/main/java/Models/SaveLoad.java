@@ -9,10 +9,6 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-import static Models.Artifacts.Artifact.ARMOUR;
-import static Models.Artifacts.Artifact.HELM;
-import static Models.Artifacts.Artifact.WEAPON;
-
 public class SaveLoad {
 
     private static final String savedGameDir = "src/main/java/Models/savedGames.txt";
@@ -111,7 +107,7 @@ public class SaveLoad {
                         oHero = new S(name ,level, xpPnts, hpPnts ,attackPnts, defencePnts, null, equipped);
                         break;
                     default:
-                        oHero = new Hero(name ,level, xpPnts, hpPnts ,attackPnts, defencePnts, null, equipped);
+                        oHero = new HeroBuilder().setName(name).setLevel(level).setExperiencePnts(xpPnts).setMaxHitPnts(hpPnts).setMaxAttackPnts(attackPnts).setMaxDefencePnts(defencePnts).setBackpack(null).setEquipped(equipped).createHero();
                         break;
                 }
                 heroList.add(oHero);

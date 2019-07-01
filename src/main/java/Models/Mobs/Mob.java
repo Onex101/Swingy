@@ -3,6 +3,8 @@ package Models.Mobs;
 import Models.Artifacts.Artifact;
 import Models.Items.Item;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -10,8 +12,9 @@ import java.util.Random;
 import static Models.Artifacts.Artifact.*;
 import static Models.Artifacts.Artifact.HELM;
 
-public abstract class Mob {
+public class Mob {
 
+    @NotEmpty(message = "Mob name cannot be empty")
     protected String name;
     protected int level;
     protected int attackPnts;
@@ -23,6 +26,7 @@ public abstract class Mob {
     protected int maxDefencePnts;
     protected int maxExperiencePnts;
     protected List<Item> backpack = new ArrayList<Item>();
+    @NotNull(message = "equipped items cannot be null")
     protected Artifact[] equipped = new Artifact[3];
 
     public Mob() {
@@ -103,11 +107,6 @@ public abstract class Mob {
         this.hitPnts = i;
     }
 
-    public void defend(){}
-
-    public void takeDamage(){}
-
-    public void gainHitPnts(){}
 
     public String getName() {
         return this.name;

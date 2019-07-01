@@ -7,15 +7,18 @@ import Models.SaveLoad;
 import Views.Console.GameScreen;
 import Views.GameView;
 
+import javax.validation.constraints.NotNull;
 import java.util.Random;
 
 import static Models.Artifacts.Artifact.*;
 
 public class GameController {
 
+    @NotNull(message = "View cannot be null")
     private GameView gameView;
     private int prevX;
     private int prevY;
+    @NotNull (message = "Game cannot be empty")
     private Game game;
 
     public GameController(Game game, GameView gameView){
@@ -61,7 +64,7 @@ public class GameController {
     }
 
     public void displayGame() {
-        if (this.game.getRound() >= 2){
+        if (this.game.getRound() > 10){
             gameView.displayWin();
         }
         else{

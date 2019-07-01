@@ -1,5 +1,8 @@
 package Models.Artifacts;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Random;
 
 public class Artifact {
@@ -8,8 +11,11 @@ public class Artifact {
     public static final int WEAPON = 2;
     public String[] artifactNames = new String[]{"Rare", "Common", "Legendary", "Black Ice"};
 
+    @Size(max = 5, message = "Ability buff of artifact needs to be between 0 and 5")
     private int abilityBuff;
+    @NotEmpty(message = "Please enter name for artifact")
     private String name;
+    @Size(max = 2, message = "Ability type of artifact cannot be greater than 2")
     private int type;
 
     public Artifact(int abilityBuff) {

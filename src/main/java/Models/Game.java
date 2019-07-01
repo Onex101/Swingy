@@ -4,15 +4,21 @@ import Models.Artifacts.Artifact;
 import Models.Mobs.Hero;
 import Models.Mobs.Monster;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Random;
 
 
 public class Game {
+
+    @NotNull (message = "Hero cannot be null")
     private Hero hero;
     private int heroX;
     private int heroY;
     private int mapSize;
+    @Size (min = 1, message = "Round cannot be less than 1")
     private int round;
+    @NotNull (message = "Map cannot be null")
     private int[][] map;
 
     static final int HERO = 1;
@@ -28,7 +34,8 @@ public class Game {
         this.heroY = mapSize / 2;
         this.map = new int[mapSize][mapSize];
         this.map[this.heroY][this.heroX] = HERO;
-        this.round = 1;
+        if (this.round < 1)
+            this.round = 1;
         generateMonsters();
     }
 
@@ -93,8 +100,8 @@ public class Game {
     }
 
     public void newRound() {
-        initGame(this.hero);
         this.round++;
+        initGame(this.hero);
     }
 
     public int getMapSize() {

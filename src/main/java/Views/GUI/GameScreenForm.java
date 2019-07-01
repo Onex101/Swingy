@@ -14,6 +14,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
 
+import static Models.Artifacts.Artifact.*;
+
 public class GameScreenForm extends JFrame implements GameView {
 
     private GameController controller;
@@ -56,6 +58,10 @@ public class GameScreenForm extends JFrame implements GameView {
     private JPanel pnlYesNo;
     private JButton saveButton;
     private JButton switchButton;
+    private JLabel lblHelm;
+    private JLabel lblArmour;
+    private JLabel lblWeapon;
+    private JTextArea roundCount;
     private Monster monster;
 
     public GameScreenForm() {
@@ -126,9 +132,17 @@ public class GameScreenForm extends JFrame implements GameView {
         lblAttackPnts.setText("Attack Points: " + hero.getAttackPnts());
         lblDefencePnts.setText("Defence Points: " + hero.getDefencePnts());
         lblExperiencePnts.setText("Experience Points: " + hero.getExperiencePnts());
+
+        lblHelm.setText("Helm: " + hero.getEquipped()[HELM].getName());
+        lblArmour.setText("Armour: " + hero.getEquipped()[ARMOUR].getName());
+        lblWeapon.setText("Weapon: " + hero.getEquipped()[WEAPON].getName());
+
+        roundCount.setText("Round " + game.getRound());
+
         hideAllCentrePanels();
         hideAllButtonPanels();
         pnlDirections.setVisible(true);
+        switchButton.setVisible(true);
         printMap();
         JFrame frame = Main.getFrame();
         frame.setContentPane(mainPanel);
@@ -146,6 +160,7 @@ public class GameScreenForm extends JFrame implements GameView {
         txtNotifiication.setText("A Monster has appeared! What are you going to do, " + controller.getGame().getHero().getName() + "? :");
         hideAllButtonPanels();
         pnlRunFight.setVisible(true);
+        switchButton.setVisible(false);
     }
 
     @Override
@@ -191,6 +206,7 @@ public class GameScreenForm extends JFrame implements GameView {
     public void displayWin(){
         txtNotifiication.setText("Well done you you've cleaned up the city! You are the ultimate hero!");
         hideAllButtonPanels();
+        switchButton.setVisible(false);
     }
 
     private void hideAllCentrePanels(){

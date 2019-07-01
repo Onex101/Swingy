@@ -3,12 +3,13 @@ package Controllers;
 import GameLogic.Main;
 import Models.Mobs.*;
 import Models.SaveLoad;
-import Views.Console.GameScreen;
 import Views.CreateHeroView;
-import Views.GameView;
+
+import javax.validation.constraints.NotNull;
 
 public class CreateHeroController {
 
+    @NotNull (message = "View cannot be null")
     private final CreateHeroView createHeroView;
 
     public CreateHeroController(CreateHeroView createHeroView){
@@ -31,7 +32,7 @@ public class CreateHeroController {
                 oHero = new S(name);
                 break;
             default:
-                oHero = new Hero(name);
+                oHero = new HeroBuilder().setName(name).createHero();
                 break;
         }
         SaveLoad.saveGame(oHero);

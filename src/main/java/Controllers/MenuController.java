@@ -5,8 +5,11 @@ import Views.Console.MenuScreen;
 import Views.Console.SelectHeroScreen;
 import Views.MenuView;
 
+import javax.validation.constraints.NotNull;
+
 public class MenuController {
 
+    @NotNull(message = "View cannot be null")
     private MenuView menuView;
 
     public MenuController(MenuView menuView){
