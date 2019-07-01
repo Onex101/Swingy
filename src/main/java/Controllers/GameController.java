@@ -3,7 +3,9 @@ package Controllers;
 import Models.Artifacts.Artifact;
 import Models.Game;
 import Models.Mobs.Monster;
+import Models.SaveLoad;
 import Views.Console.GameScreen;
+import Views.GameView;
 
 import java.util.Random;
 
@@ -11,12 +13,12 @@ import static Models.Artifacts.Artifact.*;
 
 public class GameController {
 
-    private GameScreen gameView;
+    private GameView gameView;
     private int prevX;
     private int prevY;
     private Game game;
 
-    public GameController(Game game, GameScreen gameView){
+    public GameController(Game game, GameView gameView){
         this.gameView = gameView;
         this.game = game;
     }
@@ -42,12 +44,12 @@ public class GameController {
                 break;
         }
 
-        if (x < 0 || y < 0 || x >= game.getMapSize() || y >= game.getMapSize()) {
+        if (x < 0 || y < 0 || x >= this.game.getMapSize() || y >= this.game.getMapSize()) {
+            game.moveHero(x, y, prevX, prevY);
             this.game.newRound(); //Needs to be built
             displayGame();
         }
-
-        if (game.moveHero(x, y, prevX, prevY)) {
+        else if (game.moveHero(x, y, prevX, prevY)) {
             this.gameView.displayEncounter();
         }
         else{
@@ -59,7 +61,12 @@ public class GameController {
     }
 
     public void displayGame() {
-        this.gameView.display(this.game);
+        if (this.game.getRound() >= 2){
+            gameView.displayWin();
+        }
+        else{
+            this.gameView.display(this.game);
+        }
     }
 
     public Game getGame() {
@@ -86,7 +93,6 @@ public class GameController {
         }
         else{
             this.gameView.displayRunFailed();
-            this.onFight();
         }
     }
 
@@ -97,5 +103,13 @@ public class GameController {
             game.getHero().getEquipped()[ARMOUR] = equipped[ARMOUR];
         if (equipped[WEAPON] != null && equipped[WEAPON].getBuff() > 0)
             game.getHero().getEquipped()[WEAPON] = equipped[WEAPON];
+    }
+
+    public void onSave() {
+        SaveLoad.saveGame(game.getHero());
+    }
+
+    public void onSwitch() {
+        this.gameView.switchDisplay();
     }
 }

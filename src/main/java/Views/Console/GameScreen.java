@@ -30,6 +30,8 @@ public class GameScreen implements Views.GameView {
         System.out.println("NORTH, EAST, SOUTH, WEST - to move to in the direction");
         System.out.println("GUI - to switch to GUI");
         System.out.println("MAP - to see map");
+        System.out.println("SAVE - save your hero progress so far");
+
         while (scanner.hasNext()) {
             String input = scanner.nextLine();
 
@@ -40,10 +42,13 @@ public class GameScreen implements Views.GameView {
                 controller.onMove(input);
                 break;
             } else if ("gui".equalsIgnoreCase(input)) {
-                //needs to be built
+                controller.onSwitch();
                 break;
             }else if ("map".equalsIgnoreCase(input)) {
                 printMap();
+            }else if ("save".equalsIgnoreCase(input)) {
+                controller.onSave();
+                break;
             }
             else {
                 System.out.println("Unknown command");
@@ -126,4 +131,15 @@ public class GameScreen implements Views.GameView {
         System.out.println("Oops... Seems like you tripped... Gotta fight the monster now.");
         controller.onFight();
     }
+
+    @Override
+    public void switchDisplay(){
+        Main.getFrame().setVisible(true);
+    }
+
+    @Override
+    public void displayWin(){
+        System.out.println("Well done you you've cleaned up the city! You are the ultimate hero");
+    }
+
 }

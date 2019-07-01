@@ -102,9 +102,15 @@ public class Game {
     }
 
     public boolean checkForMonster(){
-        if (map[heroY][heroX] == MONSTER){
-            return true;
+        try{
+            if (map[heroY][heroX] == MONSTER){
+                return true;
+            }
         }
+        catch(ArrayIndexOutOfBoundsException e){
+            return false;
+        }
+
         return false;
     }
 
@@ -124,15 +130,23 @@ public class Game {
     }
 
     public boolean moveHero(int x, int y, int prevX, int prevY) {
-        map[prevY][prevX] = 0;
-        setHeroCoordinates(x, y);
+
         boolean checkMonster = false;
-        if (checkForMonster())
-            checkMonster = true;
-        return checkMonster;
+
+        try{
+            map[prevY][prevX] = 0;
+            setHeroCoordinates(x, y);
+            if (checkForMonster())
+                checkMonster = true;
+            return checkMonster;
+        }
+        catch (ArrayIndexOutOfBoundsException e){
+            return checkMonster;
+        }
     }
 
     public void setMap() {
-        map[heroY][heroX] = HERO;
+        if (heroY >= 0 && heroY < mapSize && heroX >= 0 && heroX < mapSize)
+            map[heroY][heroX] = HERO;
     }
 }

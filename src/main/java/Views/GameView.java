@@ -17,4 +17,8 @@ public interface GameView {
     void displayRunSuccess();
 
     void displayRunFailed();
+
+    void switchDisplay();
+
+    void displayWin();
 }

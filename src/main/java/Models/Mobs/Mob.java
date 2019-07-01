@@ -5,6 +5,7 @@ import Models.Items.Item;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import static Models.Artifacts.Artifact.*;
 import static Models.Artifacts.Artifact.HELM;
@@ -74,21 +75,26 @@ public abstract class Mob {
     }
 
     public boolean attack(Mob mob){
-        if (this.attackPnts > mob.defencePnts){
-            int newHitPnts = mob.hitPnts + mob.defencePnts - this.attackPnts;
-            if (newHitPnts <= 0){
-                mob.setHitPnts(0);
-                return true;
+        Random rand = new Random();
+
+        int i = rand.nextInt(2);
+        if (i > 0){
+            if (this.attackPnts > mob.defencePnts){
+                int newHitPnts = mob.hitPnts + mob.defencePnts - this.attackPnts;
+                if (newHitPnts <= 0){
+                    mob.setHitPnts(0);
+                    return true;
+                }
+                mob.setHitPnts(newHitPnts);
             }
-            mob.setHitPnts(newHitPnts);
-        }
-        else{
-            int newHitPnts = mob.hitPnts - 1;
-            if (newHitPnts <= 0){
-                mob.setHitPnts(0);
-                return true;
+            else{
+                int newHitPnts = mob.hitPnts - 1;
+                if (newHitPnts <= 0){
+                    mob.setHitPnts(0);
+                    return true;
+                }
+                mob.setHitPnts(newHitPnts);
             }
-            mob.setHitPnts(newHitPnts);
         }
         return false;
     }
@@ -136,5 +142,17 @@ public abstract class Mob {
 
     public Artifact[] getEquipped() {
         return equipped;
+    }
+
+    public int getAttackPnts() {
+        return attackPnts;
+    }
+
+    public int getDefencePnts() {
+        return defencePnts;
+    }
+
+    public int getExperiencePnts() {
+        return experiencePnts;
     }
 }

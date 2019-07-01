@@ -3,10 +3,7 @@ package Models;
 import Models.Artifacts.Artifact;
 import Models.Mobs.*;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -26,7 +23,35 @@ public class SaveLoad {
 
     }
 
+    private static void deleteExisitingSave(Hero hero){
+        try
+        {
+            BufferedReader file = new BufferedReader(new FileReader(savedGameDir));
+            String line;
+            String input = "";
+            while ((line = file.readLine()) != null)
+            {
+                //System.out.println(line);
+                if (line.contains(hero.getName()))
+                {
+                    line = "";
+                    System.out.println("Line deleted.");
+                }
+                input += line + '\n';
+            }
+            FileOutputStream File = new FileOutputStream(savedGameDir);
+            File.write(input.getBytes());
+            file.close();
+            File.close();
+        }
+        catch (Exception e)
+        {
+            System.out.println("Problem reading file.");
+        }
+    }
+
     public static void saveGame(Hero hero){
+        deleteExisitingSave(hero);
         try {
             FileWriter fr = new FileWriter(file, true);
             fr.write(hero.saveString() + "\n");

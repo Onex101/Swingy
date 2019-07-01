@@ -20,7 +20,7 @@ public class Main {
 		System.out.println("Starting");
 
 		oframe = new JFrame("Swingy");
-		oframe.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		oframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		oframe.setVisible(true);
 
 //		ApplicationControls.createWindow();
@@ -51,5 +51,15 @@ public class Main {
 
 	public static JFrame getFrame() {
 		return oframe;
+	}
+
+	public static void showFrame() {
+		if (oframe != null)
+			oframe.setVisible(true);
+	}
+
+	public static void hideFrame() {
+		if (oframe != null)
+			oframe.setVisible(false);
 	}
 }
