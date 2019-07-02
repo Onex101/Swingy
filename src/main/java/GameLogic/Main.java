@@ -2,6 +2,7 @@ package GameLogic;
 
 import Models.Game;
 import Views.Console.MenuScreen;
+import Views.GUI.GameScreenForm;
 import Views.GUI.MenuScreenForm;
 
 import javax.swing.*;

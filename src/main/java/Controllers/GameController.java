@@ -110,6 +110,7 @@ public class GameController {
 
     public void onSave() {
         SaveLoad.saveGame(game.getHero());
+        displayGame();
     }
 
     public void onSwitch() {

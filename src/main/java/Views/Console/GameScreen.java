@@ -4,6 +4,7 @@ import Controllers.GameController;
 import GameLogic.Main;
 import Models.Game;
 import Models.Mobs.Monster;
+import Views.GUI.GameScreenForm;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -44,7 +45,7 @@ public class GameScreen implements Views.GameView {
                 break;
             } else if ("gui".equalsIgnoreCase(input)) {
                 controller.onSwitch();
-                break;
+                //break;
             }else if ("map".equalsIgnoreCase(input)) {
                 printMap();
             }else if ("save".equalsIgnoreCase(input)) {
@@ -138,7 +139,7 @@ public class GameScreen implements Views.GameView {
 
     @Override
     public void switchDisplay(){
-        Main.getFrame().setVisible(true);
+        new GameScreenForm().display(Main.getGame());
     }
 
     @Override
