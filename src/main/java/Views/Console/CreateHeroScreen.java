@@ -2,7 +2,6 @@ package Views.Console;
 
 import Controllers.CreateHeroController;
 import GameLogic.Main;
-import Models.Mobs.Hero;
 
 import java.util.Scanner;
 

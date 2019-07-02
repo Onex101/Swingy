@@ -3,7 +3,6 @@ package Controllers;
 import GameLogic.Main;
 import Models.Mobs.Hero;
 import Models.SaveLoad;
-import Views.Console.GameScreen;
 import Views.SelectHeroView;
 
 import javax.validation.constraints.NotNull;

@@ -5,6 +5,7 @@ import Models.Items.Item;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -15,6 +16,7 @@ import static Models.Artifacts.Artifact.HELM;
 public class Mob {
 
     @NotEmpty(message = "Mob name cannot be empty")
+    @Size(max = 25)
     protected String name;
     protected int level;
     protected int attackPnts;
@@ -44,8 +46,9 @@ public class Mob {
     }
 
     public Mob(String name, int level, int experiencePnts, int maxHitPnts, int maxAttackPnts, int maxDefencePnts, List<Item> backpack, Artifact[] equipped) {
-        this.name = name;
+        this.name = name.replace(" ", "_");
         this.level = level;
+        this.experiencePnts = experiencePnts;
 
         if (equipped == null)
             this.equipped = new Artifact[3];

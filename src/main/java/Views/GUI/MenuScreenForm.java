@@ -2,7 +2,6 @@ package Views.GUI;
 
 import Controllers.MenuController;
 import GameLogic.Main;
-import Views.Console.SelectHeroScreen;
 import Views.MenuView;
 
 import javax.swing.*;
@@ -27,6 +26,12 @@ public class MenuScreenForm implements MenuView {
             @Override
             public void actionPerformed(ActionEvent e) {
                 controller.onSelectHero();
+            }
+        });
+        newGameButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controller.onCreateHero();
             }
         });
     }

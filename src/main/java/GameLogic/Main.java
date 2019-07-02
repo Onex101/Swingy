@@ -5,6 +5,7 @@ import Views.Console.MenuScreen;
 import Views.GUI.MenuScreenForm;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.Scanner;
 
 public class Main {
@@ -22,20 +23,18 @@ public class Main {
 		oframe = new JFrame("Swingy");
 		oframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		oframe.setVisible(true);
+		oframe.setPreferredSize(new Dimension(800,800));
 
-//		ApplicationControls.createWindow();
-//
-//		EventParsing.instructionParseAsync();
-//
-//		EventData.readStdinAsync();
-
+		if (args.length > 0 && args[0] == "gui"){
+			MenuScreenForm menuScreenForm = new MenuScreenForm();
+			menuScreenForm.display();
+		}
+		else{
+			MenuScreen mainMenu = new MenuScreen();
+			mainMenu.display();
+		}
 
 		//Uncomment later just testing GUI
-//		MenuScreen mainMenu = new MenuScreen();
-//		mainMenu.display();
-
-		MenuScreenForm menuScreenForm = new MenuScreenForm();
-		menuScreenForm.display();
 
 		System.out.println("End of main");
 

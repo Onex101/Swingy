@@ -31,6 +31,7 @@ public class GameScreen implements Views.GameView {
         System.out.println("GUI - to switch to GUI");
         System.out.println("MAP - to see map");
         System.out.println("SAVE - save your hero progress so far");
+        System.out.println("EXIT - to exit game");
 
         while (scanner.hasNext()) {
             String input = scanner.nextLine();
@@ -49,6 +50,9 @@ public class GameScreen implements Views.GameView {
             }else if ("save".equalsIgnoreCase(input)) {
                 controller.onSave();
                 break;
+            }
+            else if ("exit".equalsIgnoreCase(input)) {
+                System.exit(0);
             }
             else {
                 System.out.println("Unknown command");

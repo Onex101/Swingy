@@ -4,6 +4,7 @@ import Models.Artifacts.Artifact;
 import Models.Mobs.Hero;
 import Models.Mobs.Monster;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Random;
@@ -16,7 +17,7 @@ public class Game {
     private int heroX;
     private int heroY;
     private int mapSize;
-    @Size (min = 1, message = "Round cannot be less than 1")
+    @Min(value = 1, message = "Round cannot be less than 1")
     private int round;
     @NotNull (message = "Map cannot be null")
     private int[][] map;
@@ -50,7 +51,7 @@ public class Game {
         Random randomGenerator = new Random(System.nanoTime());
         for (int i = 0; i < this.mapSize; i++) {
             for (int j = 0; j < this.mapSize; j++) {
-                rand = randomGenerator.nextInt(50);
+                rand = randomGenerator.nextInt(100);
                 if ((rand <= level * 10) && map[i][j] == 0)
                     map[i][j] = MONSTER;
             }

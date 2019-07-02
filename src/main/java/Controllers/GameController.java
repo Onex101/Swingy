@@ -64,7 +64,7 @@ public class GameController {
     }
 
     public void displayGame() {
-        if (this.game.getRound() > 10){
+        if (this.game.getRound() > 5){
             gameView.displayWin();
         }
         else{

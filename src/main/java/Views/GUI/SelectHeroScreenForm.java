@@ -6,10 +6,7 @@ import Models.Mobs.Hero;
 import Views.SelectHeroView;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.lang.reflect.Field;
-import java.util.Arrays;
+import java.awt.event.*;
 import java.util.List;
 
 public class SelectHeroScreenForm implements SelectHeroView {
@@ -18,10 +15,14 @@ public class SelectHeroScreenForm implements SelectHeroView {
     private JPanel mainPanel;
     private JList list1;
     private JButton OKButton;
+    private JLabel lblHP;
+    private JLabel lblATK;
+    private JLabel lblDEF;
+    private List<Hero> heroList;
 
     public SelectHeroScreenForm() {
         controller = new SelectHeroController(this);
-        final List<Hero> heroList = controller.getSaveGames();
+        heroList = controller.getSaveGames();
         String[] heroNames = new String[heroList.size()];
         for(int i = 0; i < heroList.size(); i++) {
             heroNames[i] = heroList.get(i).getName();
@@ -32,6 +33,16 @@ public class SelectHeroScreenForm implements SelectHeroView {
             public void actionPerformed(ActionEvent e) {
                 System.out.println(list1.getSelectedIndex());
                 controller.onHeroSelect(heroList.get(list1.getSelectedIndex()));
+            }
+        });
+        list1.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                Hero hero = heroList.get(list1.getSelectedIndex());
+                lblHP.setText("HP: " + hero.getHitPnts());
+                lblATK.setText("ATK: " + hero.getAttackPnts());
+                lblDEF.setText("DEF: " + hero.getDefencePnts());
             }
         });
     }

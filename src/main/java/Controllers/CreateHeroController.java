@@ -17,6 +17,7 @@ public class CreateHeroController {
     }
 
     public void onCreateHero(String name, String heroClass) {
+        name = name.length() >= 20 ? name.substring(0, 20) : name;
         Hero oHero;
         switch(heroClass.toUpperCase()){
             case "C":
