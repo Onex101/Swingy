@@ -1,12 +1,16 @@
 package GameLogic;
 
+import Controllers.GameController;
 import Models.Game;
+import Views.Console.GameScreen;
 import Views.Console.MenuScreen;
 import Views.GUI.GameScreenForm;
 import Views.GUI.MenuScreenForm;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.Scanner;
 
 public class Main {
@@ -22,11 +26,18 @@ public class Main {
 		System.out.println("Starting");
 
 		oframe = new JFrame("Swingy");
-		oframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        oframe.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent we) {
+                if (oGame.getHero() != null){
+                    new GameController(oGame, new GameScreen(oGame)).onSave();
+                }
+                System.exit(0);
+            }
+        });
 		oframe.setVisible(true);
-		oframe.setPreferredSize(new Dimension(800,800));
+		oframe.setPreferredSize(new Dimension(1000,800));
 
-		if (args.length > 0 && args[0] == "gui"){
+		if (args.length > 0 && args[0].equals("gui")){
 			MenuScreenForm menuScreenForm = new MenuScreenForm();
 			menuScreenForm.display();
 		}
@@ -34,11 +45,6 @@ public class Main {
 			MenuScreen mainMenu = new MenuScreen();
 			mainMenu.display();
 		}
-
-		//Uncomment later just testing GUI
-
-		System.out.println("End of main");
-
 	}
 
 	public static Scanner getScanner() {

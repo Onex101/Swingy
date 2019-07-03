@@ -31,9 +31,8 @@ public class SaveLoad {
                 if (line.contains(hero.getName()))
                 {
                     line = "";
-                    System.out.println("Line deleted.");
                 }
-                input += line + '\n';
+                input += line;
             }
             FileOutputStream File = new FileOutputStream(savedGameDir);
             File.write(input.getBytes());

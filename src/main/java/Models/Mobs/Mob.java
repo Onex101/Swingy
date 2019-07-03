@@ -138,7 +138,7 @@ public class Mob {
         if (equipped[ARMOUR] != null && equipped[ARMOUR].getBuff() > 0)
             items += "Armour " + equipped[ARMOUR].toString() + "\n";
         if (equipped[WEAPON] != null && equipped[WEAPON].getBuff() > 0)
-            items += "WEAPON " + equipped[WEAPON].toString() + "\n";
+            items += "WEAPON " + equipped[WEAPON].toString();
         return items;
     }
 

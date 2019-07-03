@@ -15,13 +15,13 @@ public class GameScreen implements Views.GameView {
 
     public GameScreen(Game game){
         controller = new GameController(game, this);
-        controller.displayGame();
     }
 
     @Override
     public void display(Game game) {
         System.out.println("----------Round "+game.getRound()+"----------");
         System.out.println(game.getHero().toString() +
+                "\nClass: " + game.getHero().getClass().getSimpleName() +
                 "\nPosition: " + "(" + game.getHeroX() +
                 "," + game.getHeroY() + ")");
         System.out.println("---------------------------");
@@ -29,7 +29,7 @@ public class GameScreen implements Views.GameView {
         Scanner scanner = Main.getScanner();
         System.out.println("Choose a command:");
         System.out.println("NORTH, EAST, SOUTH, WEST - to move to in the direction");
-        System.out.println("GUI - to switch to GUI");
+        System.out.println("SWITCH - to switch to GUI");
         System.out.println("MAP - to see map");
         System.out.println("SAVE - save your hero progress so far");
         System.out.println("EXIT - to exit game");
@@ -43,16 +43,16 @@ public class GameScreen implements Views.GameView {
                         "west".equalsIgnoreCase(input)) {
                 controller.onMove(input);
                 break;
-            } else if ("gui".equalsIgnoreCase(input)) {
+            } else if ("switch".equalsIgnoreCase(input)) {
                 controller.onSwitch();
-                //break;
+                break;
             }else if ("map".equalsIgnoreCase(input)) {
                 printMap();
             }else if ("save".equalsIgnoreCase(input)) {
                 controller.onSave();
-                break;
             }
             else if ("exit".equalsIgnoreCase(input)) {
+                controller.onSave();
                 System.exit(0);
             }
             else {

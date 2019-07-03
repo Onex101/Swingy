@@ -30,10 +30,10 @@ public class SelectHeroScreen implements Views.SelectHeroView {
         }
         Scanner oScanner = Main.getScanner();
         while (oScanner.hasNext()) {
-            int input = oScanner.nextInt();
+            String input = oScanner.next();
 
-            if (input < heroListSize) {
-                controller.onHeroSelect(heroList.get(input));
+            if (Integer.parseInt(input) < heroListSize) {
+                controller.onHeroSelect(heroList.get(Integer.parseInt(input) ));
                 break;
             }
             else {
@@ -45,7 +45,7 @@ public class SelectHeroScreen implements Views.SelectHeroView {
 
     @Override
     public void goToGame(){
-        new GameScreen(Main.getGame());
+        new GameScreen(Main.getGame()).display(Main.getGame());
     }
 
     @Override

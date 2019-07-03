@@ -57,10 +57,12 @@ public class GameScreenForm extends JFrame implements GameView {
     private JPanel pnlYesNo;
     private JButton saveButton;
     private JButton switchButton;
-    private JLabel lblHelm;
-    private JLabel lblArmour;
-    private JLabel lblWeapon;
+    private JTextArea lblHelm;
+    private JTextArea lblArmour;
+    private JTextArea lblWeapon;
     private JTextArea roundCount;
+    private JLabel lblLevel;
+    private JLabel lblClass;
     private Monster monster;
 
     public GameScreenForm() {
@@ -101,12 +103,14 @@ public class GameScreenForm extends JFrame implements GameView {
             public void actionPerformed(ActionEvent e) {
                 controller.onEquipLoot(monster.getEquipped());
                 controller.displayGame();
+                txtNotifiication.append("--------You continue your mission-------\n");
             }
         });
         btNo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 controller.displayGame();
+                txtNotifiication.append("--------You continue your mission-------\n");
             }
         });
         saveButton.addActionListener(new ActionListener() {
@@ -126,15 +130,17 @@ public class GameScreenForm extends JFrame implements GameView {
     @Override
     public void display(Game game) {
         Hero hero = game.getHero();
+        lblLevel.setText("Level: " + hero.getLevel());
+        lblClass.setText("Class: " + hero.getClass().getSimpleName());
         lblName.setText("Name: " + hero.getName());
         lblHitPnts.setText("Hit Points: " + hero.getHitPnts());
         lblAttackPnts.setText("Attack Points: " + hero.getAttackPnts());
         lblDefencePnts.setText("Defence Points: " + hero.getDefencePnts());
         lblExperiencePnts.setText("Experience Points: " + hero.getExperiencePnts());
 
-        lblHelm.setText("Helm: " + hero.getEquipped()[HELM].getName());
-        lblArmour.setText("Armour: " + hero.getEquipped()[ARMOUR].getName());
-        lblWeapon.setText("Weapon: " + hero.getEquipped()[WEAPON].getName());
+        lblHelm.setText("Helm: " + hero.getEquipped()[HELM].getName() + "\nBuff: " + hero.getEquipped()[HELM].getBuff());
+        lblArmour.setText("Armour: " + hero.getEquipped()[ARMOUR].getName() + "\nBuff: " + hero.getEquipped()[ARMOUR].getBuff());
+        lblWeapon.setText("Weapon: " + hero.getEquipped()[WEAPON].getName() + "\nBuff: " + hero.getEquipped()[WEAPON].getBuff());
 
         roundCount.setText("Round " + game.getRound());
 
@@ -144,6 +150,7 @@ public class GameScreenForm extends JFrame implements GameView {
         switchButton.setVisible(true);
         printMap();
         JFrame frame = Main.getFrame();
+        frame.setVisible(true);
         frame.setContentPane(mainPanel);
         frame.pack();
     }
@@ -156,7 +163,7 @@ public class GameScreenForm extends JFrame implements GameView {
 
     @Override
     public void displayEncounter() {
-        txtNotifiication.setText("A Monster has appeared! What are you going to do, " + controller.getGame().getHero().getName() + "? :");
+        txtNotifiication.append("- A Monster has appeared! What are you going to do, " + controller.getGame().getHero().getName() + "?\n");
         hideAllButtonPanels();
         pnlRunFight.setVisible(true);
         switchButton.setVisible(false);
@@ -165,31 +172,33 @@ public class GameScreenForm extends JFrame implements GameView {
     @Override
     public void displayMonster(Monster monster) {
         this.monster = monster;
-        txtNotifiication.setText("My name is " + monster.getName() + ". Fear me!\n");
+        txtNotifiication.append("- My name is " + monster.getName() + ". Fear me!\n");
         hideAllButtonPanels();
     }
 
     @Override
     public void displayFightLost() {
-        txtNotifiication.append("Better luck next time hero");
+        txtNotifiication.append("- Better luck next time hero\n");
+        hideAllButtonPanels();
+        switchButton.setVisible(false);
     }
 
     @Override
     public void displayFightWon(Monster monster) {
-        txtNotifiication.append("Well done hero! You defeated the monster!\n The monster dropped an Artifact \n" + monster.toStringEquipped() + "Would you like to equip it?");
+        txtNotifiication.append("- Well done hero! You defeated the monster!\n- The monster dropped an Artifact: \n" + monster.toStringEquipped() + "- Would you like to equip it?\n");
         pnlYesNo.setVisible(true);
     }
 
     @Override
     public void displayRunSuccess() {
-        txtNotifiication.setText("Well done you ran away!");
+        txtNotifiication.append("- Well done you ran away!\n");
         hideAllButtonPanels();
         pnlDirections.setVisible(true);
     }
 
     @Override
     public void displayRunFailed() {
-        txtNotifiication.setText("Oops... Seems like you tripped... Gotta fight the monster now.");
+        txtNotifiication.append("- Oops... Seems like you tripped... Gotta fight the monster now.\n");
         hideAllButtonPanels();
         pnlContinue.setVisible(true);
         controller.onFight();
@@ -198,12 +207,12 @@ public class GameScreenForm extends JFrame implements GameView {
     @Override
     public void switchDisplay(){
         Main.getFrame().setVisible(false);
-        new GameScreen(Main.getGame());
+        new GameScreen(Main.getGame()).display(Main.getGame());
     }
 
     @Override
     public void displayWin(){
-        txtNotifiication.setText("Well done you you've cleaned up the city! You are the ultimate hero!");
+        txtNotifiication.append("- Well done you you've cleaned up the city! You are the ultimate hero!\n");
         hideAllButtonPanels();
         switchButton.setVisible(false);
     }

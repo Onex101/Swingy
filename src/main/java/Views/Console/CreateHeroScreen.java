@@ -38,8 +38,7 @@ public class CreateHeroScreen implements Views.CreateHeroView {
                 break;
             } else {
                 System.out.println("Then why do you want to be a Hero?");
-                //exit program or go back to home screen;
-                break;
+                System.exit(0);
             }
         }
     }
