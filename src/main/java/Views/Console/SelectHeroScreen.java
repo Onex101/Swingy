@@ -20,26 +20,29 @@ public class SelectHeroScreen implements Views.SelectHeroView {
     public void display() {
         heroList = controller.getSaveGames();
         int heroListSize = heroList.size();
-        if (heroListSize <= 0)
+        if (heroListSize <= 0){
             controller.goToHeroCreate();
-
-        System.out.println("Please select a character by their index");
-        for (int i = 0; i < heroListSize; ++i){
-            System.out.println("Hero Index:" + i);
-            System.out.println(heroList.get(i).toString());
         }
-        Scanner oScanner = Main.getScanner();
-        while (oScanner.hasNext()) {
-            String input = oScanner.next();
-
-            if (Integer.parseInt(input) < heroListSize) {
-                controller.onHeroSelect(heroList.get(Integer.parseInt(input) ));
-                break;
+        else{
+            System.out.println("Please select a character by their index");
+            for (int i = 0; i < heroListSize; ++i){
+                System.out.println("Hero Index:" + i);
+                System.out.println(heroList.get(i).toString());
             }
-            else {
-                System.out.println("Unknown command");
+            Scanner oScanner = Main.getScanner();
+            while (oScanner.hasNext()) {
+                String input = oScanner.next();
+
+                if (Integer.parseInt(input) < heroListSize) {
+                    controller.onHeroSelect(heroList.get(Integer.parseInt(input) ));
+                    break;
+                }
+                else {
+                    System.out.println("Unknown command");
+                }
             }
         }
+
 
     }
 
@@ -50,6 +53,6 @@ public class SelectHeroScreen implements Views.SelectHeroView {
 
     @Override
     public void goToHeroCreate(){
-        new CreateHeroScreen();
+        new CreateHeroScreen().display();
     }
 }

@@ -1,12 +1,17 @@
 package Views.GUI;
 
 import Controllers.MenuController;
+import Controllers.SelectHeroController;
 import GameLogic.Main;
+import Models.Mobs.Hero;
 import Views.MenuView;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
+
+import static Models.SaveLoad.getSaveGames;
 
 public class MenuScreenForm implements MenuView {
     private JButton newGameButton;
@@ -25,7 +30,9 @@ public class MenuScreenForm implements MenuView {
         loadGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                controller.onSelectHero();
+                if (getSaveGames().size() > 0){
+                    controller.onSelectHero();
+                }
             }
         });
         newGameButton.addActionListener(new ActionListener() {
